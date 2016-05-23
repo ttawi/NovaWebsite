@@ -35,6 +35,10 @@ img {
     width: 10000px;
 }
 
+#album:hover {
+    cursor: url("misc/cursor_right.png");
+}
+
 body {
         background:scroll center center;
         background-color: white;
