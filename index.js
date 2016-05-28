@@ -7,7 +7,8 @@ $(document).ready(function() {
   });
   // $( "body" ).scrollLeft(0);
 
-
+  // Set cursor.
+  // $('body').css({'cursor': 'url(http://www.andrew-yq.com/shift90/nova/misc/cursor_right.cur), default'});
 
 
 
@@ -31,10 +32,53 @@ $(document).ready(function() {
       this.scrollLeft -= (delta * 50);
     }
     event.preventDefault();
-  }); 
+  });
+
+  // keyboard arrowkey event;
+  $(window).keydown(function(event) {
+    event.preventDefault();
+    var kc = event.keyCode;
+    // Left or right arrow key triggered
+    if (kc == 37 || kc == 39) {
+      // Get current imgs' middle positions.
+      for (var i = 0; i < imgs.length; i++) {
+        var thisImg = $("#album img:nth-child(" + (i + 2) + ")");
+        var thisImgPosition = thisImg.offset();
+        imgArr[i] = Math.round(thisImgPosition.left + thisImg.width() / 2 - $(window).scrollLeft());
+      }
+
+      // Select which img should be positioned middle.
+      var imgToBeMid = null;
+      if (kc == 37) {
+        for (var i = imgs.length - 1; i >= 0; i--) {
+          if (imgArr[i] < $(window).width() / 2) {
+            imgToBeMid = imgArr[i];
+            break;
+          }
+        }
+      } else {
+        for (var i = 0; i < imgs.length; i++) {
+          if (imgArr[i] > $(window).width() / 2) {
+            imgToBeMid = imgArr[i];
+            break;
+          }
+        }
+      }
+      if (imgToBeMid != null) {
+        var scrollDistance = imgToBeMid - $(window).width() / 2;
+        $('html, body').animate({
+          scrollLeft: "+=" + scrollDistance
+        }, 150);
+      }
+    }
+  });
+
+
+
+
+  // click event;
   $("#album").click(function(event) {
-  //  var body = $("body");
-    var body = document.getElementsByTagName("body")[0];
+    event.preventDefault();
     var mouseX = event.clientX;
 
     // Get current imgs' middle positions.
@@ -43,15 +87,8 @@ $(document).ready(function() {
       var thisImgPosition = thisImg.offset();
       imgArr[i] = Math.round(thisImgPosition.left + thisImg.width() / 2 - $(window).scrollLeft());
     }
-    console.log(imgArr);
+
     // Select which img should be positioned middle.
-    var imgToBeMid = null;
-    for (var i = 0; i < imgs.length; i++) {
-      if (imgArr[i] > $(window).width() / 2) {
-        imgToBeMid = imgArr[i];
-      }
-    }
-    console.log(body);
     var imgToBeMid = null;
     if (mouseX < 960) {
       for (var i = imgs.length - 1; i >= 0; i--) {
@@ -74,7 +111,6 @@ $(document).ready(function() {
         scrollLeft: "+=" + scrollDistance
       }, 150);
     }
-    event.preventDefault();
   });
     
    

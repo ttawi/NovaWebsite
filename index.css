@@ -39,7 +39,7 @@ img {
 }
 
 #album:hover {
-    cursor: url("misc/cursor_right.png");
+    cursor: pointer;
 }
 
 body {
