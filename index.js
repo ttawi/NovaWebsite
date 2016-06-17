@@ -1,4 +1,20 @@
+window.onresize = function() {
+  //center the page as window size changes
+  centering($(window).height());
+}
+
+function centering(height) {
+  var margin = (height - 600) / 2;
+  var page = document.getElementById("page");
+  page.style.marginTop = parseInt(margin) + "px";
+  page.style.marginBottom = parseInt(margin) + "px";
+}
+
 $(document).ready(function() {
+  
+  //center the initial page
+  centering($(window).height());
+
   $('ul.form li a').click(function(e) {
     //e.preventDefault(); // prevent the default action
     //e.stopPropagation; // stop the click from bubbling
@@ -9,7 +25,6 @@ $(document).ready(function() {
 
   // Set cursor.
   // $('body').css({'cursor': 'url(http://www.andrew-yq.com/shift90/nova/misc/cursor_right.cur), default'});
-
 
 
 
@@ -27,7 +42,6 @@ $(document).ready(function() {
 
   var nthImg = 2;
   $("body").mousewheel(function(event, delta) {
-    console.log(this);
     if (this.scrollLeft != 0 || delta < 0) {
       this.scrollLeft -= (delta * 50);
     }
@@ -89,8 +103,10 @@ $(document).ready(function() {
     }
 
     // Select which img should be positioned middle.
+    // mid point is set based on the window width
     var imgToBeMid = null;
-    if (mouseX < 960) {
+    var midPoint = $(window).width() / 2;
+    if (mouseX < midPoint) {
       for (var i = imgs.length - 1; i >= 0; i--) {
         if (imgArr[i] < $(window).width() / 2) {
           imgToBeMid = imgArr[i];
@@ -113,8 +129,7 @@ $(document).ready(function() {
     }
   });
     
-   
-   
+  
 
 });
 

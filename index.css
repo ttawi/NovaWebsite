@@ -1,9 +1,8 @@
 #page {
-    height: 0;
-    margin: 12.5vh auto;
+    height: 600px;
 	margin-left: 0;
 	margin-right: 0;
-	width: 0;
+    display: inline-block;
 }
 
 #menu {
@@ -11,13 +10,19 @@
     overflow: hidden;
     position: fixed;
     left: 5%;
-    height: 75vh;
+    height: 600px;
     background-color: rgba(255, 255, 255, 0.6);
+}
+
+#mail {
+    position: fixed;7
+    bottom: 5vh;
+    left: 3vh;
 }
 
 #blank {
     width: 300px;
-    height: 75vh;
+    height: 600px;
     margin-left: 5vh;
     margin-right: 6vh;
     max-height: 100%;
@@ -33,7 +38,7 @@ img {
     overflow: hidden;
     background: none;
     overflow-x: hidden;
-    height: 75vh;
+    height: 600px;
     display: inline-flex;
 }
 
