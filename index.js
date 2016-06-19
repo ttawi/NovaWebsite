@@ -4,7 +4,7 @@ window.onresize = function() {
 }
 
 function centering(height) {
-  var margin = (height - 600) / 2;
+  var margin = (height - 700) / 2;
   var page = document.getElementById("page");
   page.style.marginTop = parseInt(margin) + "px";
   page.style.marginBottom = parseInt(margin) + "px";
@@ -12,14 +12,22 @@ function centering(height) {
 
 $(document).ready(function() {
   
+  document.getElementById('Editorial').style.display = 'inline-flex';
+
   //center the initial page
   centering($(window).height());
 
   $('ul.form li a').click(function(e) {
     //e.preventDefault(); // prevent the default action
     //e.stopPropagation; // stop the click from bubbling
-    $(this).closest('ul').find('.selected').removeClass('selected');
+    var last = $(this).closest('ul').find('.selected');
+    last.removeClass('selected');
+    var toHide = last.children().html();
+    document.getElementById(toHide).style.display = "none";
+
     $(this).parent().addClass('selected');
+    var toShow = $(this).html();
+    document.getElementById(toShow).style.display = "inline-flex";
   });
   // $( "body" ).scrollLeft(0);
 
@@ -27,6 +35,7 @@ $(document).ready(function() {
   // $('body').css({'cursor': 'url(http://www.andrew-yq.com/shift90/nova/misc/cursor_right.cur), default'});
 
 
+  var types = ["Editorial", "Portrait", "Landscape", "Commercial", "Street"];
 
   // get each img's mid line position and store them in an array.
   var imgs = $("#album img");
